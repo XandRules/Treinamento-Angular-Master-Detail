@@ -4,7 +4,7 @@ import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api'
 export class InMemoryDatabase implements InMemoryDbService{
 
 
-  createDb(): Category[] {
+  createDb() {
     const categories: Category[] = [
       {id: 1, name: "Lazer", description: "Cinema, Parques, Praia, etc"},
       {id: 2, name: "Saúde", description: "Plano de saúde e remédios"},
@@ -13,6 +13,6 @@ export class InMemoryDatabase implements InMemoryDbService{
       {id: 5, name: "Freelas", description: "Trabalhos como freelancer"}
     ]
 
-    return categories ;
+    return {categories} ;
   }
 }
