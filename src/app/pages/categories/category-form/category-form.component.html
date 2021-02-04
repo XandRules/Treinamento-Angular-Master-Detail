@@ -9,7 +9,7 @@
     </li>
     <li class="breadcrumb-item active">
       {{pageTitle}}
-      
+
     </li>
   </ol>
 </nav>
@@ -51,6 +51,14 @@
 
       </div>
     </div>
+  </div>
+  <div class="alert alert-danger mt-4" *ngIf="serverErrorMessages">
+    <strong>Erro no servidor:</strong>
+    <ul>
+      <li *ngFor="let error of serverErrorMessages">
+        {{error}}
+      </li>
+    </ul>
   </div>
   <button [disabled]="submittingForm || categoryForm.invalid" type="submit" class="btn btn-primary btn-lg float-right mt-3"> Salvar </button>
 </form>
