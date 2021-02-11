@@ -1,5 +1,5 @@
 import { CategoryService } from './../../../pages/categories/shared/category.service';
-import { OnInit, AfterContentChecked, Injector } from '@angular/core';
+import { OnInit, AfterContentChecked, Injector, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -8,9 +8,8 @@ import { BaseResouceService } from "../../services/base-resources.service";
 
 import { switchMap } from "rxjs/operators";
 import toastr from "toastr";
-import { inject } from '@angular/core/testing';
 
-
+@Injectable()
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
   currentAction: string;
