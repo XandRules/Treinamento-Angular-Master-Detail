@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs/operators';
 import { mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { CategoryService } from './../../categories/shared/category.service';
@@ -22,25 +23,22 @@ export class EntryService extends BaseResouceService<Entry> {
       super("api/entries", injector, Entry.fromJson);
   }
 
-  create(entry: Entry): Observable<Entry>{
-
-    return this.categoryService.getById(entry.categoryId).pipe(
-      mergeMap(category => {
-
-      entry.category = category;
-      return super.create(entry);
-      })
-    );
+  create(entry: Entry): Observable<Entry> {
+    return this.setCategoryAndSendToServer(entry, super.create.bind(this))
   }
 
   update(entry: Entry): Observable<Entry>{
+    return this.setCategoryAndSendToServer(entry, super.update.bind(this))
+  }
 
-    return this.categoryService.getById(entry.categoryId).pipe(mergeMap(category => {
-      entry.category = category;
-      return super.update(entry);
-
-    }))
-
+  private setCategoryAndSendToServer(entry: Entry, sendFn: any): Observable<any> {
+    return this.categoryService.getById(entry.categoryId).pipe(
+      mergeMap(category => {
+        entry.category = category;
+        return sendFn(entry)
+      }),
+      catchError(this.handleError)
+    );
   }
 
 
