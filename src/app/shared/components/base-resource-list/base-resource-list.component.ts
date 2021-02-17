@@ -1,9 +1,10 @@
 
-import { OnInit } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 import { BaseResouceService } from 'src/app/shared/services/base-resources.service';
 import { BaseResourceModel } from '../../models/base-resource.model';
 
+@Injectable()
 export abstract class BaseResourceListComponent<T extends BaseResourceModel> implements OnInit {
 
   resources: T[] = [];
